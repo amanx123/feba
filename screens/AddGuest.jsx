@@ -6,11 +6,12 @@ import {
   TextInput,
   ScrollView,
   Keyboard,
+  RefreshControl,
 } from "react-native";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Ionicons } from "@expo/vector-icons";
-import { useEffect, useLayoutEffect, useState } from "react";
+import { useCallback, useEffect, useLayoutEffect, useState } from "react";
 import User from "../components/User";
 import { LogBox } from "react-native";
 
@@ -24,11 +25,12 @@ const AddGuest = () => {
       headerShown: false,
     });
   }, []);
-  useEffect(() => {}, [guest, guests, setGuests]);
-  const [guest, setGuest] = useState("");
   LogBox.ignoreLogs([
-    "Non-serializable values were found in the navigation state",
+    "Non-serializable values were found in the navigation state", //error message solved
   ]);
+  const [guest, setGuest] = useState("");
+  useEffect(() => {}, [guest, guests]);
+
   const handleRemove = (item) => {
     setGuests((prev) => {
       return prev.filter((x) => x.id !== item.id);
