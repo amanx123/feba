@@ -1,11 +1,11 @@
 import { View, Text, Image, TouchableOpacity, Animated } from "react-native";
 import { useRef, useState } from "react";
 import { Entypo } from "@expo/vector-icons";
-
-const GuestsCard = ({ index, title, imageUrl, guests }) => {
+import { Checkbox } from "react-native-paper";
+const GuestsCard = ({ title, imageUrl, guests }) => {
   const [expanded, setExpanded] = useState(false);
   const animationController = useRef(new Animated.Value(0)).current;
-  const [checked, setChecked] = useState(false);
+
   const toggleList = () => {
     const config = {
       duration: 200,
@@ -20,7 +20,7 @@ const GuestsCard = ({ index, title, imageUrl, guests }) => {
     outputRange: ["0deg", "180deg"],
   });
   return (
-    <View>
+    <View className>
       <TouchableOpacity activeOpacity={0.9} onPress={() => toggleList()}>
         <View
           className="h-18 mx-2 p-1 space-x-2 bg-white flex-row"
@@ -50,13 +50,17 @@ const GuestsCard = ({ index, title, imageUrl, guests }) => {
           {guests?.map((guest) => (
             <View
               key={guest.id}
-              className="h-14 mx-2 p-4 bg-white justify-center"
+              className="h-16 mx-2 p-4 bg-white flex-row space-x-14 items-center"
               style={{
                 borderBottomColor: "black",
                 borderBottomWidth: 0.2,
               }}
             >
-              <Text>{guest.name}</Text>
+              <Checkbox status="checked" color="#d64161" onPress={() => {}} />
+              <Text className="font-extrabold text-lg ">{guest.name}</Text>
+              <Text className="absolute right-8 text-4xl text-green-400">
+                •
+              </Text>
             </View>
           ))}
         </View>

@@ -5,6 +5,8 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { AntDesign } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
+import { useContext } from "react";
+import GuestsContext from "../context/GuestsContext";
 const HomeScreen = () => {
   const navigation = useNavigation();
   useLayoutEffect(() => {
@@ -12,7 +14,13 @@ const HomeScreen = () => {
       headerShown: false,
     });
   }, []);
-
+  let num = useContext(GuestsContext);
+  const total =
+    num.husbandFamily.length +
+    num.husbandColleagues.length +
+    num.wifeFamily.length +
+    num.wifeColleagues.length +
+    num.general.length;
   return (
     <>
       <SafeAreaView className="bg-rose-500 flex-1">
@@ -64,12 +72,17 @@ const HomeScreen = () => {
           >
             <MaterialIcons name="people-alt" size={38} color="#d64161" />
             <Text className="text-4xl font-extrabold text-rose-500 top-1">
-              20
+              {total + 2}
             </Text>
             <Text className="text-center font-extrabold text-rose-500 px-2">
               Wedding Guests
             </Text>
-            <TouchableOpacity className="border-2 rounded-xl border-rose-600 flex-row items-center px-2 space-x-1 ">
+            <TouchableOpacity
+              className="border-2 rounded-xl border-rose-600 flex-row items-center px-2 space-x-1 "
+              onPress={() => {
+                navigation.navigate("GuestList");
+              }}
+            >
               <Text className="text-rose-500 text-xs text-center font-extrabold">
                 Add Guest List
               </Text>

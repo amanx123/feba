@@ -1,8 +1,10 @@
 import { useNavigation } from "@react-navigation/native";
+
 import { View, Text, TouchableOpacity, Image } from "react-native";
 
-const GuestGroupCard = ({ index, imageUrl, title, guests }) => {
+const GuestGroupCard = ({ imageUrl, title, guests, setGuests }) => {
   const navigation = useNavigation();
+
   return (
     <View
       className="h-18 mx-2 p-2 space-x-2 bg-white flex-row mb-2 relative"
@@ -23,6 +25,7 @@ const GuestGroupCard = ({ index, imageUrl, title, guests }) => {
           navigation.navigate("AddGuest", {
             title,
             guests,
+            setGuests,
           });
         }}
       >
